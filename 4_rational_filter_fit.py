@@ -1,11 +1,8 @@
 """
-Rational-filter each simulation in SXS_IDS (CCE, news), then BGP_fit the
-direct wave.
+Rational-filter then BGP_fit the direct wave.
 
-The (2,2,0,1) and (3,2,0,1) fundamentals are removed via a rational filter.
-A BGP_fit with the single DW mode (2,2,"DW") is then run on the residual
-signal.  The horizon frequency ω_H is fixed at the theoretical value
-determined by the simulation remnant parameters — Mf and chif are not free.
+The (2,2,0,1), (2, 2, 1, 1), and (3,2,0,1) fundamentals are removed via a rational filter.
+A BGP_fit with the single DW mode (2,2,"DW") is then run on the residual signal. 
 
 Output: figs/4_rational_filter_fit_{SXS_ID}.pdf
 """

@@ -1,18 +1,12 @@
 """
-MCMC free-frequency fits for SXS:BBH:0004 (CCE, news).
+MCMC free-frequency fits for SXS:BBH:0004.
 
-At each selected start time, runs bgp.free_frequency_fit (emcee MCMC) with:
+At each selected start time, runs bgp.free_frequency_fit (emcee) with:
   - fixed linear-model modes taken from the 2_DW_content "with DW" output
     (same per-t0 nearest-neighbour lookup as 3a_free_frequency_plot.py)
-  - target mode = (2, 2, "DW")
-
-Prior bounds on Re(omega) and Im(omega) are derived from OMEGA_R_RANGE and
-KAPPA_RANGE so that the MCMC searches the same region as the Nelder-Mead scan
-in 3a_free_frequency_plot.py.
 
 Posterior samples (post burn-in, flat chain) are saved to
   mcmc/free_freq_<SXS_ID>.npy
-for import by 3a_free_frequency_plot.py (violin plots).
 """
 
 import os
@@ -35,7 +29,7 @@ SPHERICAL_MODES = [(2, 2), (3, 2)]
 T_MCMC  = 100.0
 T0_MCMC = [0.0, 10, 20, 30, 40]
 
-NSTEPS       = 4000
+NSTEPS       = 50000
 NWALKERS     = 32
 BURN_IN_FRAC = 0.3
 

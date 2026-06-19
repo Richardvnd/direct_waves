@@ -1,12 +1,8 @@
 """
-Run BGP_select for each simulation in SXS_IDS (CCE, news) with and without
+Run BGP_select for each simulation selected with and without
 the direct wave candidate mode.  Outputs two JSON files per simulation:
   mode_content_files/dw_{SXS_ID}_no_dw.json
   mode_content_files/dw_{SXS_ID}_with_dw.json
-
-After each selection step, a BGP_fit is run on the selected mode set to
-compute the posterior predictive check (PPC): the median (and 25/75%) of the
-per-sample p-values P(ξ² < χ²), stored alongside the mode lists.
 
 A quick check plot of the PPC curves is saved to diagnostic_figs/ppcs/2_ppc_check_{SXS_ID}.pdf.
 """

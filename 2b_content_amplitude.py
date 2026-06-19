@@ -3,7 +3,7 @@ Amplitude figure for the BGP_select mode sets from 4_DW_content.py.
 
 A BGP_fit is run at each t0 using the mode set selected at that start time.
 Two stacked panels (no-DW top, with-DW bottom) show the decay-corrected
-(2,2,n,+1) amplitudes with 25/75% posterior bands, and the DW amplitude in
+(2,2,n,+) amplitudes with 25/75% posterior bands, and the DW amplitude in
 config.color_dw.
 
 Loads:  mode_content_files/dw_0004_no_dw.json

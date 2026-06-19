@@ -1,11 +1,5 @@
 """
-Mode content figure for SXS:BBH:0010 (CCE, news), (3,3) sector, no-DW vs with-DW.
-
-Each mode row has two sub-bars: top = no-DW run, bottom = with-DW run.
-The DW mode itself appears only in the bottom sub-bar.
-(4,3) modes are used as supporting modes in the fit but are not plotted.
-
-A grey shaded region marks the t0 range where the PPC drops below 0.5.
+Mode content figure for SXS:BBH:0010 (3,3) sector, no-DW vs with-DW.
 
 Loads:  mode_content_files/dw_0010_no_dw.json
         mode_content_files/dw_0010_with_dw.json

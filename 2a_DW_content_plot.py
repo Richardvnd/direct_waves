@@ -1,12 +1,6 @@
 """
 Mode content figure for SXS:BBH:0004 (CCE, news), no-DW vs with-DW.
 
-Each mode row has two sub-bars: top = no-DW run, bottom = with-DW run.
-The DW mode itself appears only in the bottom sub-bar.
-
-A grey shaded region marks the t0 range where the PPC drops below 0.5,
-shown separately for the no-DW and with-DW runs.
-
 Loads:  mode_content_files/dw_0004_no_dw.json
         mode_content_files/dw_0004_with_dw.json
 Output: figs/2a_DW_content_{SXS_ID}.png

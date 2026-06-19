@@ -62,7 +62,6 @@ def compute_resolution_band(sxs_id):
     sim_L5 = bgp.SXS_CCE(sxs_id, type=DATA_TYPE, lev="Lev5", radius="R2")
     sim_L4 = bgp.SXS_CCE(sxs_id, type=DATA_TYPE, lev="Lev4", radius="R2")
 
-    # Time-align Lev4 to Lev5 — fine grid (delta=0.0001 M), matches get_residuals
     time_shift = bgp.get_time_shift(
         sim_L5, sim_L4,
         modes=SPHERICAL_MODES,
