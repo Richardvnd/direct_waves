@@ -1,0 +1,10 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Claude Code
+.claude/
+
+# MCMC samples — large binary data; regenerate with 3_free_frequency.py
+*.npy
