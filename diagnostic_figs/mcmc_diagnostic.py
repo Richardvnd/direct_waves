@@ -20,11 +20,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 import corner
 
-from plot_config import PlotConfig
-
-config = PlotConfig()
-config.apply_style()
-
 # ── Configuration ──────────────────────────────────────────────────────────────
 
 SXS_IDS    = ["0004"]
@@ -61,8 +56,7 @@ def plot_traces(data):
         nsteps, nwalkers, _ = full_chain.shape
         steps = np.arange(nsteps)
 
-        fig, axes = plt.subplots(4, 1, figsize=(config.fig_width_2, config.fig_height_2 * 2),
-                                 sharex=True, dpi=200)
+        fig, axes = plt.subplots(4, 1, figsize=(6, 8), sharex=True, dpi=200)
 
         for ax, param_idx, ref, ylabel in [
             (axes[0], 0, None,     r"$A_\mathrm{re}$"),
@@ -78,7 +72,7 @@ def plot_traces(data):
                     color="k", lw=1.0, zorder=5)
             ax.axvspan(0, burn_in, color="0.85", zorder=0, label=f"burn-in ({burn_in})")
             if ref is not None:
-                ax.axhline(ref, color=config.color_dw, lw=0.9, ls="--", zorder=6,
+                ax.axhline(ref, color="0.5", lw=0.9, ls="--", zorder=6,
                            label=r"$\omega_H$")
             ax.set_ylabel(ylabel)
             ax.legend(fontsize=6, frameon=False, loc="upper right")
@@ -130,7 +124,7 @@ def plot_corners(data):
             flat,
             labels=labels,
             truths=truths,
-            truth_color=config.color_dw,
+            truth_color="0.5",
             show_titles=True,
             title_kwargs={"fontsize": 7},
             label_kwargs={"fontsize": 8},
@@ -153,7 +147,7 @@ def main():
     os.makedirs(OUTPUT_DIR, exist_ok=True)
 
     for sxs_id in SXS_IDS:
-        samples_file = os.path.join(SAMPLES_DIR, f"free_freq_{sxs_id}.npy")
+        samples_file = os.path.join(SAMPLES_DIR, f"free_freq_{sxs_id}_0_only.npy")
         if not os.path.exists(samples_file):
             print(f"SKIP {sxs_id} — {samples_file} not found (run 3_free_frequency.py first)")
             continue

@@ -24,8 +24,8 @@ config.apply_style()
 
 # ── Configuration ──────────────────────────────────────────────────────────────
 
-#SXS_IDS   = ["0004"]
-SXS_IDS = [f"{i:04d}" for i in range(1, 14)]
+SXS_IDS   = ["0004"]
+#SXS_IDS = [f"{i:04d}" for i in range(1, 14)]
 
 DATA_TYPE = "news"
 

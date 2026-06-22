@@ -27,9 +27,9 @@ TARGET_MODE     = (2, 2, "DW")
 SPHERICAL_MODES = [(2, 2), (3, 2)]
 
 T_MCMC  = 100.0
-T0_MCMC = [0.0, 10, 20, 30, 40]
+T0_MCMC = [0.0]
 
-NSTEPS       = 50000
+NSTEPS       = 10000
 NWALKERS     = 32
 BURN_IN_FRAC = 0.3
 
@@ -42,7 +42,7 @@ OMEGA_R_RANGE = (0.4, 0.85)
 KAPPA_RANGE   = (0.01, 0.3)
 
 # Multiplicative range for the amplitude prior (applied around the lstsq guess)
-A_PRIOR_RANGE = (-10.0, 10.0)
+A_PRIOR_RANGE = (-100.0, 100.0)
 
 OUTPUT_DIR  = "mcmc"
 
@@ -204,7 +204,7 @@ def run_fits(sxs_id):
             "kappa_dw":        float(kappa_dw),
         },
     }
-    output_file = f"{OUTPUT_DIR}/free_freq_{sxs_id}.npy"
+    output_file = f"{OUTPUT_DIR}/free_freq_{sxs_id}_0_only.npy"
     np.save(output_file, output, allow_pickle=True)
     print(f"\nSaved {output_file}")
     return output_file

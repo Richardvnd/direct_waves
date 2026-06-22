@@ -36,7 +36,7 @@ SPHERICAL_MODES = [(3, 3), (4, 3)]
 T_GRID  = 100.0
 T0_VALS = np.arange(-10.0, 50.1, 1.0)
 
-OMEGA_R_RANGE = (0.4, 1.5)
+OMEGA_R_RANGE = (0.3, 1.25)
 KAPPA_RANGE   = (0.01, 0.8)
 
 MARKER_MODES = [(3, 3, n, 1) for n in range(4)] + [(4, 3, n, 1) for n in range(4)]
