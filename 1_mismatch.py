@@ -1,8 +1,6 @@
 """
-Mismatch vs start time for SXS:BBH:0004 (CCE, news).
+Mismatch vs start time with/without direct wave.
 
-Lines n=0..6: prograde-only (2,2,k,+1) modes, k=0..n.
-Final line:   n=0..6 + direct wave (2,2,"DW").
 """
 
 import os
@@ -47,18 +45,8 @@ def mismatch_sweep(t, data_dict, modes, Mf, chif):
 def compute_resolution_band(sxs_id):
     """
     Estimate numerical uncertainty by comparing Lev5 and Lev4 waveforms.
-
-    Mirrors bgp.get_residuals exactly:
-      1. Load both Lev5 and Lev4 (R2) data.
-      2. Time-align Lev4 to Lev5 via cross-correlation on a representative grid
-         (delta=0.1 M, alpha=0.1, window [-100, 100] M).
-      3. For each t0: mask both levels independently to [t0, t0+T_FIT],
-         compute dt from the native Lev5 step at t0, interpolate both
-         onto np.arange(t0, t0+T_FIT, dt), then compute mismatch(L5, L4).
-
-    Returns an array of shape (len(T0_ARRAY),) — the per-t0 noise floor.
     """
-    print("Loading Lev5 and Lev4 for resolution estimate...", flush=True)
+
     sim_L5 = bgp.SXS_CCE(sxs_id, type=DATA_TYPE, lev="Lev5", radius="R2")
     sim_L4 = bgp.SXS_CCE(sxs_id, type=DATA_TYPE, lev="Lev4", radius="R2")
 
@@ -160,11 +148,7 @@ def main():
     for sxs_id in SXS_IDS:
         print(f"\nSXS:BBH:{sxs_id} (CCE, {DATA_TYPE})...", flush=True)
 
-        try:
-            sim = bgp.SXS_CCE(sxs_id, type=DATA_TYPE, lev="Lev5", radius="R2")
-        except Exception as e:
-            print(f"  SKIP — failed to load: {e}")
-            continue
+        sim = bgp.SXS_CCE(sxs_id, type=DATA_TYPE, lev="Lev5", radius="R2")
 
         t    = np.asarray(sim.times)
         h22  = np.asarray(sim.h[(2, 2)])

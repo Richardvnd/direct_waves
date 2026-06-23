@@ -1,10 +1,9 @@
 """
-Amplitude figure for the BGP_select mode sets from 4_DW_content.py.
+Amplitude figure for the BGP_select mode sets from 2_DW_content.py.
 
 A BGP_fit is run at each t0 using the mode set selected at that start time.
 Two stacked panels (no-DW top, with-DW bottom) show the decay-corrected
-(2,2,n,+) amplitudes with 25/75% posterior bands, and the DW amplitude in
-config.color_dw.
+(2,2,n,+) amplitudes with 25/75pc posterior bands, and the DW amplitude.
 
 Loads:  mode_content_files/dw_0004_no_dw.json
         mode_content_files/dw_0004_with_dw.json
@@ -233,12 +232,7 @@ def main():
         no_dw_modes, t0_vals, sph_modes, Mf, chif, no_dw_ppc = load_json(no_dw_path)
         dw_modes, _, _, _, _, dw_ppc = load_json(with_dw_path)
 
-        print(f"\nLoading SXS:BBH:{sxs_id} (CCE)...", flush=True)
-        try:
-            sim = bgp.SXS_CCE(sxs_id, type=DATA_TYPE, lev="Lev5", radius="R2")
-        except Exception as e:
-            print(f"  SKIP — failed to load: {e}")
-            continue
+        sim = bgp.SXS_CCE(sxs_id, type=DATA_TYPE, lev="Lev5", radius="R2")
 
         print("Fitting amplitudes [no DW]...", flush=True)
         no_dw_fits = get_fits(sim, sxs_id, t0_vals, no_dw_modes, sph_modes, Mf, chif)

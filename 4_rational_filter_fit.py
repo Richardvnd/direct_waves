@@ -1,7 +1,7 @@
 """
 Rational-filter then BGP_fit the direct wave.
 
-The (2,2,0,1), (2, 2, 1, 1), and (3,2,0,1) fundamentals are removed via a rational filter.
+The (2,2,0,1), (2,2,1,1), and (3,2,0,1) fundamentals are removed via a rational filter.
 A BGP_fit with the single DW mode (2,2,"DW") is then run on the residual signal. 
 
 Output: figs/4_rational_filter_fit_{SXS_ID}.pdf
@@ -47,11 +47,7 @@ def main():
     for sxs_id in SXS_IDS:
         print(f"\nSXS:BBH:{sxs_id}", flush=True)
 
-        try:
-            sim = bgp.SXS_CCE(sxs_id, type=DATA_TYPE, lev="Lev5", radius="R2")
-        except Exception as e:
-            print(f"  SKIP — failed to load: {e}")
-            continue
+        sim = bgp.SXS_CCE(sxs_id, type=DATA_TYPE, lev="Lev5", radius="R2")
 
         times = np.asarray(sim.times)
         h22   = np.asarray(sim.h[(2, 2)])

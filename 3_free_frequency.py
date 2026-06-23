@@ -1,9 +1,9 @@
 """
 MCMC free-frequency fits for SXS:BBH:0004.
 
-At each selected start time, runs bgp.free_frequency_fit (emcee) with:
-  - fixed linear-model modes taken from the 2_DW_content "with DW" output
-    (same per-t0 nearest-neighbour lookup as 3a_free_frequency_plot.py)
+At each selected start time, runs bgp.free_frequency_fit (emcee) with 
+fixed linear-model modes taken from the 2_DW_content "with DW" output
+but excluding the DW mode. 
 
 Posterior samples (post burn-in, flat chain) are saved to
   mcmc/free_freq_<SXS_ID>.npy
@@ -27,9 +27,9 @@ TARGET_MODE     = (2, 2, "DW")
 SPHERICAL_MODES = [(2, 2), (3, 2)]
 
 T_MCMC  = 100.0
-T0_MCMC = [0.0]
+T0_MCMC = [0.0, 10.0, 20.0, 30.0, 40.0]
 
-NSTEPS       = 10000
+NSTEPS       = 50000
 NWALKERS     = 32
 BURN_IN_FRAC = 0.3
 
@@ -42,7 +42,7 @@ OMEGA_R_RANGE = (0.4, 0.85)
 KAPPA_RANGE   = (0.01, 0.3)
 
 # Multiplicative range for the amplitude prior (applied around the lstsq guess)
-A_PRIOR_RANGE = (-100.0, 100.0)
+A_PRIOR_RANGE = (-10.0, 10.0)
 
 OUTPUT_DIR  = "mcmc"
 
@@ -204,7 +204,7 @@ def run_fits(sxs_id):
             "kappa_dw":        float(kappa_dw),
         },
     }
-    output_file = f"{OUTPUT_DIR}/free_freq_{sxs_id}_0_only.npy"
+    output_file = f"{OUTPUT_DIR}/free_freq_{sxs_id}_A50.npy"
     np.save(output_file, output, allow_pickle=True)
     print(f"\nSaved {output_file}")
     return output_file

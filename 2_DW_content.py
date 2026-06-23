@@ -172,12 +172,8 @@ def main():
         print(f"SXS:BBH:{sxs_id}", flush=True)
         print(f"{'='*60}", flush=True)
 
-        try:
-            sim = bgp.SXS_CCE(sxs_id, type=DATA_TYPE, lev="Lev5", radius="R2")
-            print(f"  Mf={sim.Mf:.6f}  chif={sim.chif_mag:.6f}")
-        except Exception as e:
-            print(f"  SKIP — failed to load: {e}")
-            continue
+        sim = bgp.SXS_CCE(sxs_id, type=DATA_TYPE, lev="Lev5", radius="R2")
+        print(f"  Mf={sim.Mf:.6f}  chif={sim.chif_mag:.6f}")
 
         print("Running BGP_select [no DW]...", flush=True)
         t_start = time.time()

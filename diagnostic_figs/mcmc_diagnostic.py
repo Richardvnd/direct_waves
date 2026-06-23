@@ -147,7 +147,7 @@ def main():
     os.makedirs(OUTPUT_DIR, exist_ok=True)
 
     for sxs_id in SXS_IDS:
-        samples_file = os.path.join(SAMPLES_DIR, f"free_freq_{sxs_id}_0_only.npy")
+        samples_file = os.path.join(SAMPLES_DIR, f"free_freq_{sxs_id}.npy")
         if not os.path.exists(samples_file):
             print(f"SKIP {sxs_id} — {samples_file} not found (run 3_free_frequency.py first)")
             continue

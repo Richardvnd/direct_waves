@@ -24,8 +24,8 @@ config.apply_style()
 
 # ── Configuration ──────────────────────────────────────────────────────────────
 
-SXS_IDS   = ["0004"]
-#SXS_IDS = [f"{i:04d}" for i in range(1, 14)]
+#SXS_IDS   = ["0004"]
+SXS_IDS = [f"{i:04d}" for i in range(1, 14)]
 
 DATA_TYPE = "news"
 
@@ -45,7 +45,6 @@ MCMC_OMEGA_R_PRIOR = (0.4, 0.85)
 MCMC_KAPPA_PRIOR   = (0.01, 0.3)
 
 # Modes marked in the complex plane and as horizontal reference lines.
-# (2,2) family only — cleanest for the 1-D panels.
 MARKER_MODES = [(2, 2, n, 1) for n in range(4)] + [(3, 2, n, 1) for n in range(4)]
 
 # ── Content loader ─────────────────────────────────────────────────────────────
@@ -89,7 +88,7 @@ def load_mcmc_samples(path):
     return data
 
 
-# ── Objective factory ──────────────────────────────────────────────────────────
+# ── Objective ──────────────────────────────────────────────────────────
 
 def make_objective(times, data_dict, fixed_modes, target_mode,
                    chif, Mf, t0, T, spherical_modes):
@@ -104,7 +103,7 @@ def make_objective(times, data_dict, fixed_modes, target_mode,
     all_modes   = fixed_modes + [target_mode]
     n_fixed     = len(fixed_modes)
     if n_fixed == 0:
-        return None   # nothing to fix; free-only fit not meaningful here
+        return None 
 
     fixed_freqs   = np.array(bgp.qnm.omega_list(fixed_modes, chif, Mf))
     indices_lists = [[lm + mode for mode in all_modes] for lm in spherical_modes]
@@ -189,8 +188,8 @@ def plot_combined(omega_r_fits, kappa_fits, t0_vals,
             if t0_m < -9:
                 continue
             draw_violin(ax_re, t0_m, or_samp, OMEGA_R_RANGE)
-    for bound in MCMC_OMEGA_R_PRIOR:
-        ax_re.axhline(bound, color="0.0", lw=0.6, ls="-", alpha=0.1, zorder=1)
+        for bound in MCMC_OMEGA_R_PRIOR:
+            ax_re.axhline(bound, color="0.0", lw=0.6, ls="-", alpha=0.1, zorder=1)
 
     ax_re.scatter(t0_arr, omega_r_fits, **scatter_kw)
     ax_re.axhline(omega_dw.real, color=config.color_dw,
@@ -208,8 +207,8 @@ def plot_combined(omega_r_fits, kappa_fits, t0_vals,
             if t0_m < -9:
                 continue
             draw_violin(ax_im, t0_m, k_samp, KAPPA_RANGE)
-    for bound in MCMC_KAPPA_PRIOR:
-        ax_im.axhline(bound, color="0.0", lw=0.6, ls="-", alpha=0.1, zorder=1)
+        for bound in MCMC_KAPPA_PRIOR:
+            ax_im.axhline(bound, color="0.0", lw=0.6, ls="-", alpha=0.1, zorder=1)
 
     ax_im.scatter(t0_arr, kappa_fits, **scatter_kw)
     ax_im.axhline(-omega_dw.imag, color=config.color_dw,
@@ -221,13 +220,14 @@ def plot_combined(omega_r_fits, kappa_fits, t0_vals,
     ax_im.legend(frameon=False, loc="upper left")
 
     # ── Right: complex-plane scatter ───────────────────────────────────────────
-    prior_rect = Rectangle(
-        (MCMC_OMEGA_R_PRIOR[0], MCMC_KAPPA_PRIOR[0]),
-        MCMC_OMEGA_R_PRIOR[1] - MCMC_OMEGA_R_PRIOR[0],
-        MCMC_KAPPA_PRIOR[1]   - MCMC_KAPPA_PRIOR[0],
-        linewidth=0.6, edgecolor=(0, 0, 0, 0.1), facecolor=(0, 0, 0, 0.03), zorder=0,
-    )
-    ax_cmp.add_patch(prior_rect)
+    if mcmc_data is not None:
+        prior_rect = Rectangle(
+            (MCMC_OMEGA_R_PRIOR[0], MCMC_KAPPA_PRIOR[0]),
+            MCMC_OMEGA_R_PRIOR[1] - MCMC_OMEGA_R_PRIOR[0],
+            MCMC_KAPPA_PRIOR[1]   - MCMC_KAPPA_PRIOR[0],
+            linewidth=0.6, edgecolor=(0, 0, 0, 0.1), facecolor=(0, 0, 0, 0.03), zorder=0,
+        )
+        ax_cmp.add_patch(prior_rect)
 
     family_marker = {(2, 2): ("x", 7), (3, 2): ("+", 8)}
     ax_cmp.plot(omega_dw.real, -omega_dw.imag,
@@ -276,8 +276,6 @@ def plot_combined(omega_r_fits, kappa_fits, t0_vals,
     cb.ax.tick_params(labelsize=6)
 
     # ── Align left panels to square height ────────────────────────────────────
-    # Render once so set_box_aspect(1) resolves the square's actual position,
-    # then rescale both left axes to span exactly the same vertical extent.
     fig.canvas.draw()
     sq_pos      = ax_cmp.get_position()
     re_pos      = ax_re.get_position()
