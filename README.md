@@ -1,23 +1,20 @@
-# Modeling Direct Waves in Binary Black Hole Ringdown
+# Modeling Direct Waves in Binary Black Hole Ringdowns
 
 Code accompanying the paper:
 
-> **[Modeling Direct Waves in Binary Black Hole Ringdown]**
+> **[Modeling Direct Waves in Binary Black Hole Ringdowns](https://arxiv.org/abs/2606.25021)**
 > Richard Dyer, Adrian Ka-Wai Chung, and Christopher J. Moore
-> arXiv:[XXXX.XXXXX](https://arxiv.org/abs/XXXX.XXXXX)
+> arXiv:[2606.25021](https://arxiv.org/abs/2606.25021)
 
 ```bibtex
 @article{Dyer:2026:DirectWaves,
     author        = {Dyer, Richard and Chung, Adrian Ka-Wai and Moore, Christopher J.},
-    title         = {Modeling Direct Waves in Binary Black Hole Ringdown},
-    year          = {XXXX},
-    eprint        = {XXXX.XXXXX},
+    title         = {Modeling Direct Waves in Binary Black Hole Ringdowns},
+    year          = {2026},
+    eprint        = {2606.25021},
     archivePrefix = {arXiv},
     primaryClass  = {gr-qc},
-    journal       = {XXXX},
-    volume        = {XXXX},
-    pages         = {XXXX},
-    doi           = {XXXX},
+    doi           = {10.48550/arXiv.2606.25021},
 }
 ```
 
